@@ -91,4 +91,14 @@ public class AdminServiceImpl implements AdminService {
             throw new LoginAcctAlreadyInUseException(CrowdConstant.ATTR_NAME_ALREADY_USE);
         }
     }
+
+    @Override
+    public void updateAdmin(Admin admin) {
+        mapper.updateByPrimaryKeySelective(admin);
+    }
+
+    @Override
+    public Admin getAdminByAdminId(Integer adminId) {
+        return mapper.selectByPrimaryKey(adminId);
+    }
 }

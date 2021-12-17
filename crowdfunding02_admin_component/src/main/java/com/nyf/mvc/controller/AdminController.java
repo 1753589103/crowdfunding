@@ -21,6 +21,24 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
+    //更新用户信息
+    @RequestMapping("admin/page/update/{adminId}/{pageNum}/{keyword}.html")
+    public String updateAdmin(
+                    @PathVariable("adminId") Integer adminId,
+                    @PathVariable("pageNum") Integer pageNum,
+                    @PathVariable("keyword") String keyword,
+                    ModelMap modelMap
+                ){
+        //获取需要修改的admin对象
+        Admin admin = adminService.getAdminByAdminId(adminId);
+        modelMap.addAttribute("admin",admin);
+        return "admin-update";
+    }
+    //更新页面的数据回显
+/*    @RequestMapping("")
+    public String getAdminById(){
+        return null;
+    }*/
     //新增用户
     @RequestMapping("admin/page/doSave.html")
     public String doSave(Admin admin){

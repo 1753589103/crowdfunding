@@ -14,4 +14,8 @@ public interface AdminService {
     void remove(Integer adminId);
 
     void saveAdmin(Admin admin);
+
+    void updateAdmin(Admin admin);
+
+    Admin getAdminByAdminId(Integer adminId);
 }
