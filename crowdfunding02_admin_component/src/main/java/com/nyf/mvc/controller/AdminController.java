@@ -21,7 +21,7 @@ import java.util.List;
 public class AdminController {
     @Autowired
     private AdminService adminService;
-    //更新用户信息
+    //更新页面的数据回显
     @RequestMapping("admin/page/update/{adminId}/{pageNum}/{keyword}.html")
     public String updateAdmin(
                     @PathVariable("adminId") Integer adminId,
@@ -34,11 +34,23 @@ public class AdminController {
         modelMap.addAttribute("admin",admin);
         return "admin-update";
     }
-    //更新页面的数据回显
-/*    @RequestMapping("")
-    public String getAdminById(){
-        return null;
-    }*/
+    //更新数据
+    @RequestMapping("admin/page/doUpdate.html")
+    public String getAdminById(
+                    @RequestParam(value = "loginAcct")  String loginAcct,
+                    @RequestParam(value = "pageNum") Integer pageNum,
+                    @RequestParam(value = "userName") String userName,
+                    @RequestParam(value = "email") String email,
+                    @RequestParam(value = "id") Integer adminId
+                ){
+        Admin admin = new Admin();
+        admin.setId(adminId);
+        admin.setLoginAcct(loginAcct);
+        admin.setUserName(userName);
+        admin.setEmail(email);
+        adminService.updateAdmin(admin);
+        return "redirect:/admin/get/page.html?pageNum="+pageNum;
+    }
     //新增用户
     @RequestMapping("admin/page/doSave.html")
     public String doSave(Admin admin){

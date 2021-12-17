@@ -7,6 +7,7 @@ import com.nyf.entity.Admin;
 import com.nyf.entity.AdminExample;
 import com.nyf.exception.DeleteFailedException;
 import com.nyf.exception.LoginAcctAlreadyInUseException;
+import com.nyf.exception.LoginAcctAlreadyInUseForUpdateException;
 import com.nyf.mapper.AdminMapper;
 import com.nyf.service.api.AdminService;
 import com.nyf.util.CrowdUtil;
@@ -94,7 +95,12 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public void updateAdmin(Admin admin) {
-        mapper.updateByPrimaryKeySelective(admin);
+       try{
+           mapper.updateByPrimaryKeySelective(admin);
+       } catch (DuplicateKeyException e){
+            throw new LoginAcctAlreadyInUseForUpdateException(CrowdConstant.ATTR_NAME_ALREADY_USE);
+        }
+
     }
 
     @Override
