@@ -8,9 +8,9 @@ function generatePage(){
 // 从远程服务器端获取PageInfo数据
 function getPageInfoRemote(){
 
-    // 调用$.ajax()函数发送请求，并用ajaxResult接收函数返回值
+    // 调用$.ajax()函数发送请求，并用ajaxResult接收函 数返回值
     var ajaxResult = $.ajax({
-        url:"role/page/page.json",
+        url:"role/get/page/info.json",
         type:"post",
         data:{
             "pageNum":window.pageNum,
