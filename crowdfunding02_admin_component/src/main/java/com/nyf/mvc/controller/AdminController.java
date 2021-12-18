@@ -41,7 +41,8 @@ public class AdminController {
                     @RequestParam(value = "pageNum") Integer pageNum,
                     @RequestParam(value = "userName") String userName,
                     @RequestParam(value = "email") String email,
-                    @RequestParam(value = "id") Integer adminId
+                    @RequestParam(value = "id") Integer adminId,
+                    @RequestParam(value = "keyw ord") String keyword
                 ){
         Admin admin = new Admin();
         admin.setId(adminId);
@@ -49,7 +50,7 @@ public class AdminController {
         admin.setUserName(userName);
         admin.setEmail(email);
         adminService.updateAdmin(admin);
-        return "redirect:/admin/get/page.html?pageNum="+pageNum;
+        return "redirect:/admin/get/page.html?pageNum="+pageNum+"&keyword="+keyword;
     }
     //新增用户
     @RequestMapping("admin/page/doSave.html")
