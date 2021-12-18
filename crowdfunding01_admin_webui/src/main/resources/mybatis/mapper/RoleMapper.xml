@@ -80,6 +80,12 @@
       order by ${orderByClause}
     </if>
   </select>
+  <select id="selectByKeyword" resultMap="BaseResultMap" >
+    select
+    <include refid="Base_Column_List" />
+    from t_role
+    where name like concat("%",#{name},"%")
+  </select>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
     <include refid="Base_Column_List" />
