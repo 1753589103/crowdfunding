@@ -41,7 +41,7 @@
         <!-- 前往角色维护页面 -->
     <mvc:view-controller path="/role/to/page.html" view-name="role-page"/>
         <!-- 前往菜单维护页面 -->
-<!--    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>-->
+    <mvc:view-controller path="/menu/to/page.html" view-name="menu-page"/>
 
 
     <!--在mvc容器中注册拦截器 ： 在使用SpringSecurity后，就要注释掉原来的自定义的拦截器了-->
