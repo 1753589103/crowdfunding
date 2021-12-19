@@ -163,6 +163,7 @@
 
             // 关闭模态框
             $("#confirmRoleModal").modal("hide");
+
         });
 
         // 给单条删除按钮绑定单击事件
@@ -174,7 +175,8 @@
             }]
 
             showConfirmModal(roleArray);
-
+            check();
+            docheck();
         });
 
 
@@ -210,9 +212,8 @@
 
 
 
-
         // 单击全选框时，使下面的内容全选/全不选
-        $("#summaryBox").click(function () {
+        $("#summaryBox").click(function doCheck() {
             // 获取当前状态（是否被选中）
             var currentStatus = this.checked;
 
@@ -221,7 +222,7 @@
         });
 
         // 由下面的选择框，改变全选框的勾选状态
-        $("#rolePageTBody").on("click",".itemBox",function () {
+        $("#rolePageTBody").on("click",".itemBox",function check() {
 
             // 获取当前已被选中的itemBox的数量
             var checkedBoxCount = $(".itemBox:checked").length;
