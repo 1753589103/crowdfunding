@@ -85,7 +85,7 @@ public class AdminController {
         return "admin-page";
     }
     //登陆验证
-    @RequestMapping("/security/do/login.html")
+/*    @RequestMapping("/security/do/login.html")
     public String doLogin(
                 @RequestParam("login-user") String user,
                 @RequestParam("login-pwd") String pwd,
@@ -103,5 +103,5 @@ public class AdminController {
 //        让sesion失效
         session.invalidate();
         return "redirect:/admin/login/page.html";
-    }
+    }*/
 }

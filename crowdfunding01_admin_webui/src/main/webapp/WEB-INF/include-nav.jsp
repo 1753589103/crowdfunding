@@ -13,7 +13,7 @@
                     <div class="btn-group">
                         <button type="button" class="btn btn-default btn-success dropdown-toggle" data-toggle="dropdown">
                             <%-- 通过principal.originalAdmin.userName得到当前用户的昵称（principal其实就是前面返回的SecurityAdmin对象） --%>
-                            <i class="glyphicon glyphicon-user"><security:authentication property="principal.originalAdmin.userName"/></i>
+                            <i class="glyphicon glyphicon-user"><%--<security:authentication property="principal.originalAdmin.userName"/>--%></i>
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
