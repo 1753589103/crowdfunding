@@ -107,4 +107,10 @@ public class AdminServiceImpl implements AdminService {
     public Admin getAdminByAdminId(Integer adminId) {
         return mapper.selectByPrimaryKey(adminId);
     }
+
+    @Override
+    public void saveAdminRelationship(Integer adminId, List<Integer> roleIdList) {
+        mapper.deleteOldRelationship(adminId);
+        mapper.insertNewRelationship(adminId,roleIdList);
+    }
 }
