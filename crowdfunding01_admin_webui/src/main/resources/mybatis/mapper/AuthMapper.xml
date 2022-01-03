@@ -154,7 +154,17 @@
     select auth_id from inner_role_auth
     where role_id = #{roleId}
   </select>
-  <update id="updateByExampleSelective" parameterType="map" >
+    <select id="selectAssignedAuthNameListByAdminId" resultType="java.lang.String"
+            parameterType="java.lang.Integer">
+      SELECT
+        DISTINCT t_auth.name
+      from t_auth
+             LEFT JOIN inner_role_auth ON inner_role_auth.auth_id = t_auth.id
+             LEFT JOIN inner_admin_role ON inner_admin_role.role_id = inner_role_auth.role_id
+      WHERE inner_admin_role.admin_id = #{adminId}
+        AND t_auth.name != "" and t_auth.name IS NOT NULL
+    </select>
+    <update id="updateByExampleSelective" parameterType="map" >
     update t_auth
     <set >
       <if test="record.id != null" >

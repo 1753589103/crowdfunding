@@ -49,6 +49,6 @@
     </tx:advice>
 
     <!-- 将BCryptPasswordEncoder装配入IOC容器 -->
-    <!--<bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"/>-->
+    <bean class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" id="passwordEncoder"/>
 
 </beans>

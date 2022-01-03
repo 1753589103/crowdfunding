@@ -13,6 +13,7 @@ import com.nyf.service.api.AdminService;
 import com.nyf.util.CrowdUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLIntegrityConstraintViolationException;
@@ -23,8 +24,13 @@ import java.util.Objects;
 
 @Service
 public class AdminServiceImpl implements AdminService {
+
+    @Autowired
+    BCryptPasswordEncoder bCryptPasswordEncoder;
+
     @Autowired
     AdminMapper mapper;
+
     @Override
     public Admin getAdminByUsername(String adminLoginAcct, String adminPassword) {
         //1、根据登录账户查找admin对象
@@ -77,7 +83,9 @@ public class AdminServiceImpl implements AdminService {
     @Override
     public void saveAdmin(Admin admin) {
         //密码加密
-        String userPswd = CrowdUtil.md5(admin.getUserPswd());
+        String userPswd = admin.getUserPswd();
+
+        userPswd = bCryptPasswordEncoder.encode(userPswd);
         //把加密好的密码放回admin中
         admin.setUserPswd(userPswd);
         //获取当前时间
@@ -112,5 +120,15 @@ public class AdminServiceImpl implements AdminService {
     public void saveAdminRelationship(Integer adminId, List<Integer> roleIdList) {
         mapper.deleteOldRelationship(adminId);
         mapper.insertNewRelationship(adminId,roleIdList);
+    }
+
+    @Override
+    public Admin getAdminByLoginAcct(String loginAcct) {	// 通过loginAcct得到Admin对象
+        AdminExample example = new AdminExample();
+        AdminExample.Criteria criteria = example.createCriteria();
+        criteria.andLoginAcctEqualTo(loginAcct);
+        List<Admin> admins = mapper.selectByExample(example);
+        Admin admin = admins.get(0);
+        return admin;
     }
 }
